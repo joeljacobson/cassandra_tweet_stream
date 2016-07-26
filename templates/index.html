@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Maintained by Joel Jacobson</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Cassandra, Solr and Spark Twitter Demo</h1>
+        <p>Search the tweets below</p>
+        <div class="col-lg-6">
+            <div class="input-group">
+                <input id="search_term" type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+        <button id="search_button" class="btn btn-default" type="button">Go!</button>
+      </span>
+            </div>
+
+        </div>
+
+        <div id="result">
+        </div>
+
+    </div>
+
+</body>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#search_button").click(function() {
+            var search_term = $("#search_term").val();
+            var html = '';
+            $.get("/api/search?q=" + search_term, function(data) {
+                for (var key in data) {
+                    var value = data[key];
+                    html += '<div><strong>@' + value.user_name + ':</strong> '
+                    html += value.tweet + '</div>';
+
+                }
+                $("#result").append(html);
+            });
+        });
+    });
+</script>
+
+</html>

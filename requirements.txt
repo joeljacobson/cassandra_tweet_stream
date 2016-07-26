@@ -1,0 +1,5 @@
+Flask==0.11.1
+Flask_Cassandra==0.14
+tweepy==3.5.0
+cassandra_driver==3.5.0
+solrpy==0.9.7
