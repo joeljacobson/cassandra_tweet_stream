@@ -18,12 +18,6 @@ session.execute(
         """
 )
 
-session.execute(
-        """
-        CREATE INDEX IF NOT EXISTS ON twitter_data.tweets (user_name);
-       """
-)
-
 class ImportToCassandra:
     def process_tweet_list(self, list):
         
